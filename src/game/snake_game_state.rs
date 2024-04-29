@@ -1,5 +1,4 @@
 use bracket_lib::color::{GREEN_YELLOW, NAVY_BLUE, WHITE, REBECCA_PURPLE};
-use bracket_lib::random::RandomNumberGenerator;
 use bracket_lib::terminal::{Point, VirtualKeyCode};
 use bracket_lib::terminal::BTerm;
 
@@ -8,7 +7,7 @@ use crate::{SCREEN_HEIGHT, SCREEN_WIDTH};
 use super::ai::Ai;
 use super::fruit::Fruit;
 use super::player::Player;
-use super::map::Map;
+use super::map::{get_random_position, Map};
 
 pub const BACKGROUND_COLOR: (u8, u8, u8) = NAVY_BLUE;
 pub const PLAYER_COLOR: (u8, u8, u8) = GREEN_YELLOW;
@@ -27,10 +26,10 @@ pub struct SnakeGameState {
 
 impl SnakeGameState {
     pub fn new() -> Self {
-        let enemy = Player::new(ENEMY_COLOR);
+        let enemy = Player::new(ENEMY_COLOR, get_random_position());
 
         SnakeGameState {
-            player: Player::new(PLAYER_COLOR),
+            player: Player::new(PLAYER_COLOR, get_random_position()),
             enemy: enemy,
             map: Map::new(),
             ai: Ai::new(),
@@ -41,12 +40,12 @@ impl SnakeGameState {
     }
 
     pub fn fruit_builder(&mut self) -> Fruit {
-        let mut rng = RandomNumberGenerator::new();
+        let random_position = get_random_position();
         // get all map places
         // remove places occupied by player and tail
         // pick random
 
-        Fruit::new(rng.range(0, SCREEN_WIDTH), rng.range(0, SCREEN_HEIGHT))
+        Fruit::new(random_position.x as usize, random_position.y as usize)
     }
 
     fn render(& mut self, ctx: &mut BTerm) {
@@ -134,7 +133,7 @@ impl SnakeGameState {
     }
 
     fn respawn_enemy(& mut self) {
-        self.enemy = Player::new(ENEMY_COLOR);
+        self.enemy = Player::new(ENEMY_COLOR, get_random_position());
     }
 
     pub fn player_inputs_handler(& mut self, ctx: & mut BTerm) {

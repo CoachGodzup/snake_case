@@ -19,6 +19,12 @@ pub fn map_index(x: usize, y: usize) -> usize {
     ((y * SCREEN_WIDTH) + x) as usize
 }
 
+pub fn get_random_position() -> Point {
+    let mut rng = RandomNumberGenerator::new();
+
+    Point::new(rng.range(0, SCREEN_WIDTH), rng.range(0, SCREEN_HEIGHT))
+}
+
 impl Map {
     pub fn new() -> Self {
         Self {

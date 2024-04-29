@@ -18,10 +18,10 @@ pub struct Player {
 }
 
 impl Player {
-    pub fn new(color: (u8, u8, u8)) -> Self {
+    pub fn new(color: (u8, u8, u8), start_position: Point) -> Self {
         Player {
             facing: Direction::Up,
-            head_position: Point { x: 40, y: 20 },
+            head_position: start_position,
             tail: [].to_vec(),
             length: 4,
             color: color,
