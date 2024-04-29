@@ -1,3 +1,5 @@
+use bracket_lib::color::{NAVY_BLUE, WHITE};
+use bracket_lib::random::RandomNumberGenerator;
 use bracket_lib::terminal::{Point, VirtualKeyCode};
 use bracket_lib::{color::ROYALBLUE, terminal::BTerm};
 
@@ -7,7 +9,7 @@ use super::fruit::Fruit;
 use super::player::Player;
 use super::map::Map;
 
-pub const BACKGROUND_COLOR: (u8, u8, u8) = ROYALBLUE;
+pub const BACKGROUND_COLOR: (u8, u8, u8) = NAVY_BLUE;
 
 pub struct SnakeGameState {
     player: Player,
@@ -37,17 +39,24 @@ impl SnakeGameState {
     }
 
     pub fn fruit_builder(&mut self) -> Fruit {
+
+        let mut rng = RandomNumberGenerator::new();
         // get all map places
         // remove places occupied by player and tail
         // pick random
 
-        Fruit::new(65, 10)
+        Fruit::new(rng.range(0, SCREEN_WIDTH), rng.range(0, SCREEN_HEIGHT))
     }
 
     fn render(& mut self, ctx: &mut BTerm) {
         self.map.render(ctx);
         self.fruit.render(ctx);
         self.player.render(ctx);
+        self.gui_render(ctx);
+    }
+
+    fn gui_render(& mut self, ctx: &mut BTerm) {
+        ctx.print_color_centered(0, WHITE, BACKGROUND_COLOR, &format!("Your score is: {}", self.player.get_length()));
     }
 
     pub fn play(&mut self,  ctx: &mut BTerm) {

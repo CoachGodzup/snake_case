@@ -1,7 +1,7 @@
 use crate::prelude::*;
 
 use super::snake_game_state::BACKGROUND_COLOR;
-const NUM_TILES: usize = (SCREEN_WIDTH * SCREEN_HEIGHT) as usize;
+const NUM_TILES: usize = 4096 as usize;
 
 
 #[derive(Clone, Copy, PartialEq)]
@@ -29,7 +29,7 @@ fn coord_from_idx(idx: usize) -> (usize, usize) {
 impl Map {
     pub fn new() -> Self {
         Self {
-            tiles: vec![TileType::Floor; 4096],
+            tiles: vec![TileType::Floor; NUM_TILES],
         }
     }
 
