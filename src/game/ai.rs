@@ -1,7 +1,6 @@
-use std::num;
 use bracket_lib::terminal::Point;
 
-use super::{fruit::Fruit, player::{Direction}};
+use super::{fruit::Fruit, player::Direction};
 
 pub struct Ai {
 }

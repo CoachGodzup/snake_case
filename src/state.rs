@@ -10,7 +10,6 @@ pub enum GameMode {
 
 pub struct State {
     pub mode: GameMode,
-    score: usize,
     game: Option<SnakeGameState>,
 }
 
@@ -18,7 +17,6 @@ impl State {
     pub fn new() -> Self {
         State {
             mode: GameMode::Menu,
-            score: 0,
             game: None,
         }
     }

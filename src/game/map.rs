@@ -6,7 +6,7 @@ const NUM_TILES: usize = 4096 as usize;
 
 #[derive(Clone, Copy, PartialEq)]
 pub enum TileType {
-    Wall,
+    // Wall,
     Floor,
 }
 // why?? does not make more sense a sparse array?
@@ -17,13 +17,6 @@ pub struct Map {
 // rows first
 pub fn map_index(x: usize, y: usize) -> usize {
     ((y * SCREEN_WIDTH) + x) as usize
-}
-
-fn coord_from_idx(idx: usize) -> (usize, usize) {
-    let x = idx % SCREEN_WIDTH;
-    let y = idx / (SCREEN_WIDTH - x) as usize;
-
-    (x, y)
 }
 
 impl Map {
@@ -38,9 +31,9 @@ impl Map {
             TileType::Floor => {
                 ctx.set(x, y, BACKGROUND_COLOR, BACKGROUND_COLOR, to_cp437('.'))
             }
-            TileType::Wall => {
+            /*TileType::Wall => {
                 ctx.set(x, y, BLACK, BACKGROUND_COLOR, to_cp437('#'))
-            }
+            }*/
         }
     }
 
@@ -62,14 +55,6 @@ impl Map {
     pub fn can_enter(&self, dest: Point) -> bool {
         self.in_bounds(dest) &&
         self.tiles[map_index(dest.x as usize, dest.y as usize)]== TileType::Floor
-    }
-
-    pub fn try_index(&self, point: Point) -> Option<usize> {
-        if !self.in_bounds(point) {
-            None
-        } else {
-            Some(map_index(point.x as usize, point.y as usize))
-        }
     }
 }
 

@@ -1,4 +1,4 @@
-use bracket_lib::{color::GREEN_YELLOW, terminal::{to_cp437, BTerm, Point}};
+use bracket_lib::terminal::{to_cp437, BTerm, Point};
 
 use super::snake_game_state::BACKGROUND_COLOR;
 
@@ -80,14 +80,6 @@ impl Player {
 
     pub fn get_direction(&self) -> Direction {
         self.facing
-    }
-
-    pub fn set_direction(& mut self, dir: Direction) {
-        self.facing = dir;
-    }
-
-    pub fn get_position(&self) -> Point {
-        self.head_position
     }
 
     pub fn render(& mut self, ctx: & mut BTerm) {
