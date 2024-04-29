@@ -2,27 +2,29 @@ use bracket_lib::{color::GREEN_YELLOW, terminal::{to_cp437, BTerm, Point}};
 
 use super::snake_game_state::BACKGROUND_COLOR;
 
+#[derive(Clone, Copy, PartialEq)]
 pub enum Direction {
     Up,
     Right,
     Down,
     Left,
 }
-
 pub struct Player {
     facing: Direction,
     head_position: Point,
     tail: Vec<Point>,
     length: usize,
+    color: (u8, u8, u8),
 }
 
 impl Player {
-    pub fn new() -> Self {
+    pub fn new(color: (u8, u8, u8)) -> Self {
         Player {
             facing: Direction::Up,
             head_position: Point { x: 40, y: 20 },
             tail: [].to_vec(),
             length: 4,
+            color: color,
         }
     }
 
@@ -62,24 +64,30 @@ impl Player {
             Direction::Right => { glyph = '>'; }
         }
         
-        ctx.set(self.head_position.x, self.head_position.y, GREEN_YELLOW, BACKGROUND_COLOR, to_cp437(glyph));
+        ctx.set(self.head_position.x, self.head_position.y, self.color, BACKGROUND_COLOR, to_cp437(glyph));
     }
 
     fn render_tail(& mut self, ctx: & mut BTerm) {
         for x in 0..self.tail.len() {
             let tail_piece = self.tail[x];
-            ctx.set(tail_piece.x, tail_piece.y, GREEN_YELLOW, BACKGROUND_COLOR, to_cp437('#'));
+            ctx.set(tail_piece.x, tail_piece.y, self.color, BACKGROUND_COLOR, to_cp437('#'));
         }
-        /*
-        let mut iter = self.tail.iter();
-        while iter.next().is_some() {
-            ctx.set(self.head_position.x, self.head_position.y, GREEN_YELLOW, BACKGROUND_COLOR, to_cp437('#'));
-        }
-        */
     }
 
     pub fn get_length(&self) -> usize {
         self.length
+    }
+
+    pub fn get_direction(&self) -> Direction {
+        self.facing
+    }
+
+    pub fn set_direction(& mut self, dir: Direction) {
+        self.facing = dir;
+    }
+
+    pub fn get_position(&self) -> Point {
+        self.head_position
     }
 
     pub fn render(& mut self, ctx: & mut BTerm) {

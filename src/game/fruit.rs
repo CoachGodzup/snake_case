@@ -1,6 +1,7 @@
-use bracket_lib::{color::{ALICEBLUE, BLANCHED_ALMOND}, terminal::{to_cp437, BTerm, Point}};
+use bracket_lib::{color::BLANCHED_ALMOND, terminal::{to_cp437, BTerm, Point}};
 
 use super::snake_game_state::BACKGROUND_COLOR;
+#[derive(Clone, Copy, PartialEq)]
 
 pub struct Fruit {
     pub position: Point,

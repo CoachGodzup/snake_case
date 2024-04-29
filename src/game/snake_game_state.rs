@@ -1,30 +1,39 @@
-use bracket_lib::color::{NAVY_BLUE, WHITE};
+use bracket_lib::color::{GREEN_YELLOW, NAVY_BLUE, WHITE, REBECCA_PURPLE};
 use bracket_lib::random::RandomNumberGenerator;
 use bracket_lib::terminal::{Point, VirtualKeyCode};
-use bracket_lib::{color::ROYALBLUE, terminal::BTerm};
+use bracket_lib::terminal::BTerm;
 
 use crate::{SCREEN_HEIGHT, SCREEN_WIDTH};
 
+use super::ai::Ai;
 use super::fruit::Fruit;
 use super::player::Player;
 use super::map::Map;
 
 pub const BACKGROUND_COLOR: (u8, u8, u8) = NAVY_BLUE;
+pub const PLAYER_COLOR: (u8, u8, u8) = GREEN_YELLOW;
+pub const ENEMY_COLOR: (u8, u8, u8) = REBECCA_PURPLE;
+
 
 pub struct SnakeGameState {
     player: Player,
+    enemy: Player,
+    ai: Ai,
     map: Map,
     fruit: Fruit,
     pub is_ended: bool,
     pub final_score: usize,
-
 }
 
 impl SnakeGameState {
     pub fn new() -> Self {
+        let enemy = Player::new(ENEMY_COLOR);
+
         SnakeGameState {
-            player: Player::new(),
+            player: Player::new(PLAYER_COLOR),
+            enemy: enemy,
             map: Map::new(),
+            ai: Ai::new(),
             fruit: Fruit::new(65, 10),
             is_ended: false,
             final_score: 0,
@@ -32,14 +41,14 @@ impl SnakeGameState {
     }
 
     pub fn restart(& mut self) {
-        self.player = Player::new();
+        self.player = Player::new(PLAYER_COLOR);
+        self.enemy = Player::new(ENEMY_COLOR);
         self.map = Map::new();
         self.fruit = self.fruit_builder();
         self.is_ended = false;
     }
 
     pub fn fruit_builder(&mut self) -> Fruit {
-
         let mut rng = RandomNumberGenerator::new();
         // get all map places
         // remove places occupied by player and tail
@@ -52,6 +61,7 @@ impl SnakeGameState {
         self.map.render(ctx);
         self.fruit.render(ctx);
         self.player.render(ctx);
+        self.enemy.render(ctx);
         self.gui_render(ctx);
     }
 
@@ -62,8 +72,8 @@ impl SnakeGameState {
     pub fn play(&mut self,  ctx: &mut BTerm) {
         self.player_inputs_handler(ctx);
         self.move_player();
+        self.move_enemy();
         self.render(ctx);
-    
     }
 
     fn end_game(&mut self) {
@@ -89,7 +99,7 @@ impl SnakeGameState {
         new_pos
     }
 
-    fn move_player(& mut self) {
+    fn move_snake(& mut self) {
         let mut new_pos = self.player.get_next_pos_player();
 
         if !self.map.in_bounds(new_pos) {
@@ -97,7 +107,7 @@ impl SnakeGameState {
         }
 
         if self.player.collide(new_pos) {
-            self.end_game();
+            self.end_game(); // TODO param
         } else if self.map.can_enter(new_pos) {
             let is_eating = new_pos.x == self.fruit.position.x && new_pos.y == self.fruit.position.y;
             self.player.move_player(new_pos, is_eating);
@@ -105,6 +115,34 @@ impl SnakeGameState {
                 self.fruit = self.fruit_builder();
             }
         }
+    }
+
+    fn move_player(& mut self) {
+        self.move_snake();
+    }
+
+    fn move_enemy(& mut self) { // TODO Params
+        self.enemy.change_direction(self.ai.get_next_move(self.fruit, self.enemy.get_next_pos_player(), self.enemy.get_direction())); // TODO: passa solo la direzione e la posizione attuale?
+
+        let mut new_pos = self.enemy.get_next_pos_player();
+
+        if !self.map.in_bounds(new_pos) {
+            new_pos = SnakeGameState::pacman_effect(new_pos);
+        }
+
+        if self.enemy.collide(new_pos) {
+            self.respawn_enemy(); // TODO param
+        } else if self.map.can_enter(new_pos) {
+            let is_eating = new_pos.x == self.fruit.position.x && new_pos.y == self.fruit.position.y;
+            self.enemy.move_player(new_pos, is_eating);
+            if is_eating {
+                self.fruit = self.fruit_builder();
+            }
+        }
+    }
+
+    fn respawn_enemy(& mut self) {
+        self.enemy = Player::new(ENEMY_COLOR);
     }
 
     pub fn player_inputs_handler(& mut self, ctx: & mut BTerm) {
