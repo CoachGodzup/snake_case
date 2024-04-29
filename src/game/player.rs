@@ -40,12 +40,12 @@ impl Player {
     }
 
     pub fn move_player(&mut self, new_pos: Point, is_eating: bool) {
-        self.tail.push(self.head_position.clone());
+        self.tail.insert(0,self.head_position.clone());
         self.head_position = new_pos.clone();
         if is_eating {
             self.length = self.length + 1;
         } else if self.tail.len() >= self.length {
-            self.tail.pop();
+            self.tail.remove(self.tail.len() - 1);
         }
     }
 
@@ -66,10 +66,16 @@ impl Player {
     }
 
     fn render_tail(& mut self, ctx: & mut BTerm) {
+        for x in 0..self.tail.len() {
+            let tail_piece = self.tail[x];
+            ctx.set(tail_piece.x, tail_piece.y, GREEN_YELLOW, BACKGROUND_COLOR, to_cp437('#'));
+        }
+        /*
         let mut iter = self.tail.iter();
         while iter.next().is_some() {
             ctx.set(self.head_position.x, self.head_position.y, GREEN_YELLOW, BACKGROUND_COLOR, to_cp437('#'));
         }
+        */
     }
 
     pub fn get_length(&self) -> usize {
@@ -79,5 +85,6 @@ impl Player {
     pub fn render(& mut self, ctx: & mut BTerm) {
         self.render_head(ctx);
         self.render_tail(ctx);
+
     } }
 
