@@ -28,6 +28,7 @@ fn main() -> BError {
     let context = BTermBuilder::simple80x50()
         .with_title("snake_case")
         .with_fps_cap(15.0)
+        .with_tile_dimensions(15, 15)
         .build()?;
 
     main_loop(context, State::new())

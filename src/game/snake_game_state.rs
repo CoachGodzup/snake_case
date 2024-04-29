@@ -41,10 +41,6 @@ impl SnakeGameState {
 
     pub fn fruit_builder(&mut self) -> Fruit {
         let random_position = get_random_position();
-        // get all map places
-        // remove places occupied by player and tail
-        // pick random
-
         Fruit::new(random_position.x as usize, random_position.y as usize)
     }
 
@@ -57,7 +53,8 @@ impl SnakeGameState {
     }
 
     fn gui_render(& mut self, ctx: &mut BTerm) {
-        ctx.print_color_centered(0, WHITE, BACKGROUND_COLOR, &format!("Your score is: {}", self.player.get_length()));
+        ctx.print_color_centered(0, PLAYER_COLOR, BACKGROUND_COLOR, &format!("Your score is: {}", self.player.get_length()));
+        ctx.print_color_centered(1, ENEMY_COLOR, BACKGROUND_COLOR, &format!("Purple score is: {}", self.enemy.get_length()));
     }
 
     pub fn play(&mut self,  ctx: &mut BTerm) {
