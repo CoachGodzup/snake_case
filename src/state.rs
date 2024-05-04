@@ -59,7 +59,7 @@ impl State {
         ctx.cls();
         ctx.print_centered(5, "You are dead");
         ctx.print_color_centered(6, PLAYER_COLOR, BACKGROUND_COLOR, &format!("Your score is: {}", self.game.as_ref().unwrap().final_score));
-        ctx.print_color_centered(7, ENEMY_COLOR, BACKGROUND_COLOR, &format!("Purple score is: {}", self.game.as_ref().unwrap().final_score));
+        ctx.print_color_centered(7, ENEMY_COLOR, BACKGROUND_COLOR, &format!("Purple score is: {}", self.game.as_ref().unwrap().get_enemy().get_length()));
         ctx.print_centered(9, "(P) Play Again");
         ctx.print_centered(10, "(Q) Quit Game");
 

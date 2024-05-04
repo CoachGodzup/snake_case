@@ -10,6 +10,7 @@ pub enum TileType {
     Floor,
 }
 // why?? does not make more sense a sparse array?
+
 pub struct Map {
     pub tiles: Vec<TileType>,
 }

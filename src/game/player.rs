@@ -9,6 +9,7 @@ pub enum Direction {
     Down,
     Left,
 }
+#[derive(Clone)]
 pub struct Player {
     facing: Direction,
     head_position: Point,

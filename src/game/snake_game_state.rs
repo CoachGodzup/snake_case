@@ -4,6 +4,7 @@ use bracket_lib::terminal::BTerm;
 
 use crate::{SCREEN_HEIGHT, SCREEN_WIDTH};
 
+use super::ai::greedy::Greedy;
 use super::ai::Ai;
 use super::fruit::Fruit;
 use super::player::Player;
@@ -17,7 +18,7 @@ pub const ENEMY_COLOR: (u8, u8, u8) = REBECCA_PURPLE;
 pub struct SnakeGameState {
     player: Player,
     enemy: Player,
-    ai: Ai,
+    ai: Greedy,
     map: Map,
     fruit: Fruit,
     pub is_ended: bool,
@@ -32,7 +33,7 @@ impl SnakeGameState {
             player: Player::new(PLAYER_COLOR, get_random_position()),
             enemy: enemy,
             map: Map::new(),
-            ai: Ai::new(),
+            ai: Greedy::new(),
             fruit: Fruit::new(65, 10),
             is_ended: false,
             final_score: 0,
@@ -113,7 +114,7 @@ impl SnakeGameState {
     }
 
     fn move_enemy(& mut self) { // TODO Params
-        self.enemy.change_direction(self.ai.get_next_move(self.fruit, self.enemy.get_next_pos_player(), self.enemy.get_direction())); // TODO: passa solo la direzione e la posizione attuale?
+        self.enemy.change_direction(self.ai.get_next_move(&self));
 
         let mut new_pos = self.enemy.get_next_pos_player();
 
@@ -153,6 +154,22 @@ impl SnakeGameState {
                 _ => {},
             }
         }
+    }
+
+    pub fn get_fruit(&self) -> &Fruit {
+        &self.fruit
+    }
+
+    pub fn get_player(&self) -> &Player {
+        &self.player
+    }
+
+    pub fn get_enemy(&self) -> &Player {
+        &self.enemy
+    }
+
+    pub fn _get_map(&self) -> &Map {
+        &self.map
     }
 
 }
