@@ -1,4 +1,4 @@
-use bracket_lib::color::{GREEN_YELLOW, NAVY_BLUE, WHITE, REBECCA_PURPLE};
+use bracket_lib::color::{GREEN_YELLOW, NAVY_BLUE, REBECCA_PURPLE};
 use bracket_lib::terminal::{Point, VirtualKeyCode};
 use bracket_lib::terminal::BTerm;
 
@@ -96,6 +96,9 @@ impl SnakeGameState {
 
         if self.player.collide(new_pos) {
             self.end_game(); // TODO param
+        } else if self.enemy.collide(new_pos) {
+            self.player.add_length(self.enemy.get_length());
+            self.respawn_enemy();
         } else if self.map.can_enter(new_pos) {
             let is_eating = new_pos.x == self.fruit.position.x && new_pos.y == self.fruit.position.y;
             self.player.move_player(new_pos, is_eating);
@@ -117,9 +120,11 @@ impl SnakeGameState {
         if !self.map.in_bounds(new_pos) {
             new_pos = SnakeGameState::pacman_effect(new_pos);
         }
-
         if self.enemy.collide(new_pos) {
             self.respawn_enemy(); // TODO param
+        } else if self.player.collide(new_pos) {
+            self.enemy.add_length(self.player.get_length());
+            self.respawn_player();
         } else if self.map.can_enter(new_pos) {
             let is_eating = new_pos.x == self.fruit.position.x && new_pos.y == self.fruit.position.y;
             self.enemy.move_player(new_pos, is_eating);
@@ -131,6 +136,10 @@ impl SnakeGameState {
 
     fn respawn_enemy(& mut self) {
         self.enemy = Player::new(ENEMY_COLOR, get_random_position());
+    }
+
+    fn respawn_player(& mut self) {
+        self.player = Player::new(PLAYER_COLOR, get_random_position());
     }
 
     pub fn player_inputs_handler(& mut self, ctx: & mut BTerm) {

@@ -78,6 +78,10 @@ impl Player {
         self.length
     }
 
+    pub fn add_length(& mut self, new_points: usize) {
+        self.length = self.length + new_points;
+    }
+
     pub fn get_direction(&self) -> Direction {
         self.facing
     }
@@ -85,6 +89,5 @@ impl Player {
     pub fn render(& mut self, ctx: & mut BTerm) {
         self.render_head(ctx);
         self.render_tail(ctx);
-
     } }
 
