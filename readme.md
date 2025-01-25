@@ -18,3 +18,7 @@ git clone git@github.com:CoachGodzup/snake_case.git
 ```
 cargo run
 ```
+
+## I just want to play it!
+
+Go to our [release page](./release/linux_x86_64/README.MD)
