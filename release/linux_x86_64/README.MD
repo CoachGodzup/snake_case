@@ -3,7 +3,11 @@
 Follow these steps to install and run the `snake_case` application on a Linux x86_64 system:
 
 1. **Download the tar file**
-    - Download the `snake_case` tar file from the official website or repository.
+    - Download the `snake_case` tar file from here:
+    - [Linux Executable](./snake_case.tar.xz)
+    - Windows Executable - Work in progress
+    - Mac Executable - Work in progress
+
 
 2. **Unzip the tar file**
     - Open a terminal and navigate to the directory where the tar file is located.
