@@ -1,10 +1,10 @@
 # Installation Instructions
 
-## Download the compressed file
-    - Download the `snake_case` tar file from here (right click -> download):
-    - [Linux Executable](snake_case_linux_86-64.tar.xz)
-    - [Windows Executable](snake_case_windows_64.zip)
-    - Mac Executable - Work in progress
+### Download the compressed file
+Download the `snake_case` tar file from here (right click -> download):
+  - [Linux Executable](snake_case_linux_86-64.tar.xz)
+  - [Windows Executable](snake_case_windows_64.zip)
+  - Mac Executable - Work in progress
 
 ## Linux
 
@@ -35,7 +35,7 @@ Follow these steps to install and run the `snake_case` application on a Linux x8
 
 You have successfully installed and launched the `snake_case` application.
 
-### Windows
+## Windows
 
 Download and unzip the proper game.
 
