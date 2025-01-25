@@ -1,4 +1,4 @@
-use bracket_lib::color::{GREEN_YELLOW, NAVY_BLUE, WHITE, REBECCA_PURPLE};
+use bracket_lib::color::{GREEN_YELLOW, NAVY_BLUE, REBECCA_PURPLE};
 use bracket_lib::terminal::{Point, VirtualKeyCode};
 use bracket_lib::terminal::BTerm;
 
