@@ -6,6 +6,10 @@ Download the `snake_case` tar file from here (right click -> download):
   - [Windows Executable](snake_case_windows_64.zip)
   - Mac Executable - Work in progress
 
+## Mac
+
+I actually don't own a Mac. [Please support me on my gaming account to buy one](https://ko-fi.com/retrocoach)
+
 ## Linux
 
 Follow these steps to install and run the `snake_case` application on a Linux x86_64 system:
@@ -40,3 +44,5 @@ You have successfully installed and launched the `snake_case` application.
 Download and unzip the proper game.
 
 > Watch out! It's still marked as a virus. We're working on it
+
+Antivirus scan report: [snake_case_windows_64.zip](https://www.virustotal.com/gui/url/c162260607ae1b067f2095885d012224df111799b8c62f2db6c4871df312e05e?nocache=1) 
