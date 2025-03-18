@@ -24,7 +24,7 @@ impl Player {
             head_position: start_position,
             tail: [].to_vec(),
             length: 4,
-            color: color,
+            color,
         }
     }
 
@@ -72,6 +72,14 @@ impl Player {
             let tail_piece = self.tail[x];
             ctx.set(tail_piece.x, tail_piece.y, self.color, BACKGROUND_COLOR, to_cp437('#'));
         }
+    }
+
+    pub fn add_length(& mut self, increment: usize) {
+        self.length += increment;
+    }
+
+    pub fn set_length(& mut self, length: usize) {
+        self.length = length;
     }
 
     pub fn get_length(&self) -> usize {

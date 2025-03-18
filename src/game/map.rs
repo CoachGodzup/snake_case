@@ -20,9 +20,25 @@ pub fn map_index(x: usize, y: usize) -> usize {
 }
 
 pub fn get_random_position() -> Point {
-    let mut rng = RandomNumberGenerator::new();
+    Point::new(RandomNumberGenerator::new().range(0, SCREEN_WIDTH), RandomNumberGenerator::new().range(0, SCREEN_HEIGHT))
+}
 
-    Point::new(rng.range(0, SCREEN_WIDTH), rng.range(0, SCREEN_HEIGHT))
+pub fn pacman_effect(pos: Point) -> Point {
+    let mut new_pos: Point = pos;
+    
+    if pos.x < 0 {
+        new_pos.x = SCREEN_WIDTH as i32;
+    } else if pos.x  as i32 > SCREEN_WIDTH as i32 {
+        new_pos.x = 0;
+    }
+
+    if pos.y < 0 {
+        new_pos.y = SCREEN_HEIGHT as i32;
+    } else if pos.y as i32 > SCREEN_HEIGHT as i32{
+        new_pos.y = 0;
+    }
+
+    new_pos
 }
 
 impl Map {
