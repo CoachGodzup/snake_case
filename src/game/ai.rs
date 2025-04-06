@@ -1,44 +1,87 @@
-use bracket_lib::terminal::Point;
+use bracket_lib::prelude::Point;
 
 use super::{fruit::Fruit, player::Direction};
 
+pub trait AiBehavior {
+    fn get_next_move(&self, fruit: Fruit, current_pos: Point, player_pos: Point, current_direction: Direction) -> Direction;
+}
+
 pub struct Ai {
+    behavior: Box<dyn AiBehavior>,
 }
 
 impl Ai {
-    pub fn new () -> Self {
-        Ai {}
+    pub fn new() -> Self {
+        Ai {
+            behavior: Box::new(ChaseFruitAi {})
+        }
     }
 
-    pub fn get_next_move (&self, fruit: Fruit, position: Point, actual_direction: Direction) -> Direction {
-        let desired_move_y = self.move_vertically(fruit, position);
-        let desired_move_x = self.move_horizontally(fruit, position);
+    pub fn with_behavior(behavior: Box<dyn AiBehavior>) -> Self {
+        Ai { behavior }
+    }
 
-        if desired_move_y.is_some() && !Ai::is_opposite(desired_move_y.unwrap(), actual_direction) {
+    pub fn get_next_move(&self, fruit: Fruit, current_pos: Point, player_pos: Point, current_direction: Direction) -> Direction {
+        self.behavior.get_next_move(fruit, current_pos, player_pos, current_direction)
+    }
+}
+
+pub struct ChaseFruitAi {}
+
+impl AiBehavior for ChaseFruitAi {
+    fn get_next_move(&self, fruit: Fruit, current_pos: Point, _player_pos: Point, current_direction: Direction) -> Direction {
+        let current_x = current_pos.x;
+        let current_y = current_pos.y;
+        let fruit_x = fruit.position.x;
+        let fruit_y = fruit.position.y;
+
+        // Calcola la direzione verso il frutto
+        if current_x < fruit_x && current_direction != Direction::Left {
+            Direction::Right
+        } else if current_x > fruit_x && current_direction != Direction::Right {
+            Direction::Left
+        } else if current_y < fruit_y && current_direction != Direction::Up {
+            Direction::Down
+        } else if current_y > fruit_y && current_direction != Direction::Down {
+            Direction::Up
+        } else {
+            current_direction
+        }
+    }
+}
+
+pub struct ChasePlayerAi {}
+
+impl AiBehavior for ChasePlayerAi {
+    fn get_next_move(&self, _fruit: Fruit, position: Point, player_position: Point, actual_direction: Direction) -> Direction {
+        let desired_move_y = self.move_vertically(position, player_position);
+        let desired_move_x = self.move_horizontally(position, player_position);
+
+        if desired_move_y.is_some() && !ChasePlayerAi::is_opposite(desired_move_y.unwrap(), actual_direction) {
             desired_move_y.unwrap()
-        } else if desired_move_x.is_some() && !Ai::is_opposite(desired_move_x.unwrap(), actual_direction){
+        } else if desired_move_x.is_some() && !ChasePlayerAi::is_opposite(desired_move_x.unwrap(), actual_direction){
             desired_move_x.unwrap()
         } else {
             actual_direction
         }
-
-        // TODO: select two direction, and moving to the desired one, preferred y
     }
+}
 
-    fn move_vertically(&self, fruit: Fruit, position: Point) -> Option<Direction> {
-        if fruit.position.y < position.y {
+impl ChasePlayerAi {
+    fn move_vertically(&self, position: Point, player_position: Point) -> Option<Direction> {
+        if player_position.y < position.y {
             Some(Direction::Up)
-        } else if fruit.position.y > position.y {
+        } else if player_position.y > position.y {
             Some(Direction::Down)
         } else {
             None
         }
     }
     
-    fn move_horizontally(&self, fruit: Fruit, position: Point) -> Option<Direction> {
-        if fruit.position.x < position.x {
+    fn move_horizontally(&self, position: Point, player_position: Point) -> Option<Direction> {
+        if player_position.x < position.x {
             Some(Direction::Left)
-        } else if fruit.position.x > position.x {
+        } else if player_position.x > position.x {
             Some(Direction::Right)
         } else {
             None
