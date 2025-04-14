@@ -1,6 +1,6 @@
 # snake_case 
 
-A simple snake game made in rust, and spiced up with some AI opponent
+A simple snake game made in rust, and spiced up with some AI opponent.
 
 ![gameplay screenshot](/assets/screenshot.png)
 
