@@ -11,12 +11,6 @@ pub struct Ai {
 }
 
 impl Ai {
-    pub fn new() -> Self {
-        Ai {
-            behavior: Box::new(ChaseFruitAi {})
-        }
-    }
-
     pub fn with_behavior(behavior: Box<dyn AiBehavior>) -> Self {
         Ai { behavior }
     }

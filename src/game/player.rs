@@ -12,7 +12,6 @@ pub enum Direction {
 }
 
 pub trait SnakeCollision {
-    fn get_position(&self) -> Point;
     fn get_length(&self) -> usize;
     fn set_length(&mut self, length: usize);
     fn add_length(&mut self, length: usize);
@@ -103,9 +102,6 @@ impl Player {
 }
 
 impl SnakeCollision for Player {
-    fn get_position(&self) -> Point {
-        self.body[0]
-    }
 
     fn get_length(&self) -> usize {
         self.body.len()
