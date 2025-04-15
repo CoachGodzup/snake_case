@@ -1,48 +1,9 @@
-use bracket_lib::prelude::Point;
+use super::ai::AiBehavior;
 
-use super::{fruit::Fruit, player::Direction};
+use crate::game::fruit::Fruit;
+use crate::game::player::Direction;
 
-pub trait AiBehavior {
-    fn get_next_move(&self, fruit: Fruit, current_pos: Point, player_pos: Point, current_direction: Direction) -> Direction;
-}
-
-pub struct Ai {
-    behavior: Box<dyn AiBehavior>,
-}
-
-impl Ai {
-    pub fn with_behavior(behavior: Box<dyn AiBehavior>) -> Self {
-        Ai { behavior }
-    }
-
-    pub fn get_next_move(&self, fruit: Fruit, current_pos: Point, player_pos: Point, current_direction: Direction) -> Direction {
-        self.behavior.get_next_move(fruit, current_pos, player_pos, current_direction)
-    }
-}
-
-pub struct ChaseFruitAi {}
-
-impl AiBehavior for ChaseFruitAi {
-    fn get_next_move(&self, fruit: Fruit, current_pos: Point, _player_pos: Point, current_direction: Direction) -> Direction {
-        let current_x = current_pos.x;
-        let current_y = current_pos.y;
-        let fruit_x = fruit.position.x;
-        let fruit_y = fruit.position.y;
-
-        // Calcola la direzione verso il frutto
-        if current_x < fruit_x && current_direction != Direction::Left {
-            Direction::Right
-        } else if current_x > fruit_x && current_direction != Direction::Right {
-            Direction::Left
-        } else if current_y < fruit_y && current_direction != Direction::Up {
-            Direction::Down
-        } else if current_y > fruit_y && current_direction != Direction::Down {
-            Direction::Up
-        } else {
-            current_direction
-        }
-    }
-}
+use bracket_lib::terminal::Point;
 
 pub struct ChasePlayerAi {}
 

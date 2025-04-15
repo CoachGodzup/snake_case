@@ -2,7 +2,7 @@ use bracket_lib::terminal::{BTerm, VirtualKeyCode};
 use bracket_lib::color::BLACK;
 
 
-use crate::game::snake_game_state::{SnakeGameState, ENEMY_COLOR, PLAYER_COLOR, CPU_PLAYER_COLOR};
+use crate::game::snake_game_state::{SnakeGameState, ENEMY_COLOR, PLAYER_COLOR, CPU_PLAYER_COLOR, RANDOM_PLAYER_COLOR};
 
 pub const MENU_BACKGROUND_COLOR: (u8, u8, u8) = BLACK;
 
@@ -65,9 +65,10 @@ impl State {
         ctx.print_color_centered(6, PLAYER_COLOR, MENU_BACKGROUND_COLOR, &format!("Your score is: {}", self.game.as_ref().unwrap().final_score));
         ctx.print_color_centered(8, ENEMY_COLOR, MENU_BACKGROUND_COLOR, &format!("Purple score is: {}", self.game.as_ref().unwrap().enemy_score));
         ctx.print_color_centered(10, CPU_PLAYER_COLOR, MENU_BACKGROUND_COLOR, &format!("Yellow score is: {}", self.game.as_ref().unwrap().cpu_score));
+        ctx.print_color_centered(12, RANDOM_PLAYER_COLOR, MENU_BACKGROUND_COLOR, &format!("Randy score is: {}", self.game.as_ref().unwrap().random_score));
 
-        ctx.print_centered(12, "(P) Play Again");
-        ctx.print_centered(13, "(Q) Quit Game");
+        ctx.print_centered(14, "(P) Play Again");
+        ctx.print_centered(15, "(Q) Quit Game");
 
         if let Some(key) = ctx.key {
             match key {

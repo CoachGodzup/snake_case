@@ -3,7 +3,6 @@ use crate::prelude::*;
 use super::snake_game_state::BACKGROUND_COLOR;
 const NUM_TILES: usize = 4096 as usize;
 
-
 #[derive(Clone, Copy, PartialEq)]
 pub enum TileType {
     // Wall,
