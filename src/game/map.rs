@@ -1,7 +1,7 @@
 use crate::prelude::*;
 
 use super::snake_game_state::BACKGROUND_COLOR;
-const NUM_TILES: usize = 4096 as usize;
+const NUM_TILES: usize = 4096_usize;
 
 #[derive(Clone, Copy, PartialEq)]
 pub enum TileType {
@@ -15,7 +15,7 @@ pub struct Map {
 
 // rows first
 pub fn map_index(x: usize, y: usize) -> usize {
-    ((y * SCREEN_WIDTH) + x) as usize
+    (y * SCREEN_WIDTH) + x
 }
 
 pub fn get_random_position() -> Point {
@@ -27,13 +27,13 @@ pub fn pacman_effect(pos: Point) -> Point {
     
     if pos.x < 0 {
         new_pos.x = SCREEN_WIDTH as i32;
-    } else if pos.x  as i32 > SCREEN_WIDTH as i32 {
+    } else if pos.x  > SCREEN_WIDTH as i32 {
         new_pos.x = 0;
     }
 
     if pos.y < 0 {
         new_pos.y = SCREEN_HEIGHT as i32;
-    } else if pos.y as i32 > SCREEN_HEIGHT as i32{
+    } else if pos.y > SCREEN_HEIGHT as i32{
         new_pos.y = 0;
     }
 

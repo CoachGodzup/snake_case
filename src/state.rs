@@ -62,10 +62,10 @@ impl State {
     pub fn dead(&mut self, ctx: &mut BTerm){
         ctx.cls();
         ctx.print_centered(4, "Game over");
-        ctx.print_color_centered(6, PLAYER_COLOR, MENU_BACKGROUND_COLOR, &format!("Your score is: {}", self.game.as_ref().unwrap().final_score));
-        ctx.print_color_centered(8, ENEMY_COLOR, MENU_BACKGROUND_COLOR, &format!("Purple score is: {}", self.game.as_ref().unwrap().enemy_score));
-        ctx.print_color_centered(10, CPU_PLAYER_COLOR, MENU_BACKGROUND_COLOR, &format!("Yellow score is: {}", self.game.as_ref().unwrap().cpu_score));
-        ctx.print_color_centered(12, RANDOM_PLAYER_COLOR, MENU_BACKGROUND_COLOR, &format!("Randy score is: {}", self.game.as_ref().unwrap().random_score));
+        ctx.print_color_centered(6, PLAYER_COLOR, MENU_BACKGROUND_COLOR, format!("Your score is: {}", self.game.as_ref().unwrap().final_score));
+        ctx.print_color_centered(8, ENEMY_COLOR, MENU_BACKGROUND_COLOR, format!("Purple score is: {}", self.game.as_ref().unwrap().enemy_score));
+        ctx.print_color_centered(10, CPU_PLAYER_COLOR, MENU_BACKGROUND_COLOR, format!("Yellow score is: {}", self.game.as_ref().unwrap().cpu_score));
+        ctx.print_color_centered(12, RANDOM_PLAYER_COLOR, MENU_BACKGROUND_COLOR, format!("Randy score is: {}", self.game.as_ref().unwrap().random_score));
 
         ctx.print_centered(14, "(P) Play Again");
         ctx.print_centered(15, "(Q) Quit Game");

@@ -74,41 +74,13 @@ impl SnakeGameState {
         self.cpu_player.render(ctx);
         self.random_player.render(ctx);
         self.gui_render(ctx);
-
-        // todo deprecated
-        if self.is_ended {
-            ctx.print_color_centered(
-                20,
-                PLAYER_COLOR,
-                BACKGROUND_COLOR,
-                "Game Over! Punteggi finali:"
-            );
-            ctx.print_color_centered(
-                22,
-                PLAYER_COLOR,
-                BACKGROUND_COLOR,
-                &format!("Tu (verde): {}", self.final_score)
-            );
-            ctx.print_color_centered(
-                23,
-                ENEMY_COLOR,
-                BACKGROUND_COLOR,
-                &format!("CPU (viola): {}", self.enemy_score)
-            );
-            ctx.print_color_centered(
-                24,
-                CPU_PLAYER_COLOR,
-                BACKGROUND_COLOR,
-                &format!("CPU (giallo): {}", self.cpu_score)
-            );
-        }
     }
 
     fn gui_render(& mut self, ctx: &mut BTerm) {
-        ctx.print_color_centered(0, PLAYER_COLOR, BACKGROUND_COLOR, &format!("Your score is: {}", self.player.get_length()));
-        ctx.print_color_centered(1, ENEMY_COLOR, BACKGROUND_COLOR, &format!("Purple CPU score is: {}", self.enemy.get_length()));
-        ctx.print_color_centered(2, CPU_PLAYER_COLOR, BACKGROUND_COLOR, &format!("Yellow CPU score is: {}", self.cpu_player.get_length()));
-        ctx.print_color_centered(3, RANDOM_PLAYER_COLOR, BACKGROUND_COLOR, &format!("Randy CPU score is: {}", self.random_player.get_length()));
+        ctx.print_color_centered(0, PLAYER_COLOR, BACKGROUND_COLOR, format!("Your score is: {}", self.player.get_length()));
+        ctx.print_color_centered(1, ENEMY_COLOR, BACKGROUND_COLOR, format!("Purple CPU score is: {}", self.enemy.get_length()));
+        ctx.print_color_centered(2, CPU_PLAYER_COLOR, BACKGROUND_COLOR, format!("Yellow CPU score is: {}", self.cpu_player.get_length()));
+        ctx.print_color_centered(3, RANDOM_PLAYER_COLOR, BACKGROUND_COLOR, format!("Randy CPU score is: {}", self.random_player.get_length()));
 
     }
 

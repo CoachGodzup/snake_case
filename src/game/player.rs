@@ -25,11 +25,12 @@ pub struct Player {
 
 impl Player {
     pub fn new(color: RGB, position: Point) -> Self {
-        let mut body = Vec::new();
-        body.push(position);
-        body.push(Point::new(position.x - 1, position.y));
-        body.push(Point::new(position.x - 2, position.y));
-        body.push(Point::new(position.x - 3, position.y));
+        let body = vec![
+            position,
+            Point::new(position.x - 1, position.y),
+            Point::new(position.x - 2, position.y),
+            Point::new(position.x - 3, position.y)
+        ];
 
         Player {
             body,
@@ -77,13 +78,12 @@ impl Player {
     }
 
     fn render_head(& mut self, ctx: & mut BTerm) {
-        let glyph;
-        match self.direction {
-            Direction::Up => { glyph = '^'; }
-            Direction::Down => { glyph = 'v'; }
-            Direction::Left => { glyph = '<'; }
-            Direction::Right => { glyph = '>'; }
-        }
+        let glyph = match self.direction {
+            Direction::Up => { '^' }
+            Direction::Down => { 'v' }
+            Direction::Left => { '<' }
+            Direction::Right => { '>' }
+        };
         
         ctx.set(self.body[0].x, self.body[0].y, self.color, BACKGROUND_COLOR, to_cp437(glyph));
     }
