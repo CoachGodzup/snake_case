@@ -1,7 +1,8 @@
 # Changelog
 
-## [2025-04-14]
+## [2025-04-15]
 
-- Aggiorna changelog (4f10eea) - Matteo Garza
+- refactor: fix some cargo clippy issues (68d259e) - Matteo Garza
 ---
+
 
