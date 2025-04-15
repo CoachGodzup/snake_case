@@ -4,11 +4,21 @@
 Download the `snake_case` tar file from here (right click -> download):
   - [Linux Executable](snake_case_linux_86-64.tar.xz)
   - [Windows Executable](snake_case_windows_64.zip)
-  - [Mac Executable](snake_case_apple_silicon.zip)
+  - [Mac Executable](./snake_case_0.0.1_macos_arm64)
 
 ## Mac
 
-Download and unzip the proper game.
+Download the proper game.
+
+Make it executable via Terminal
+```bash
+chmod +x snake_case_0.0.1_macos_arm64
+```
+
+run the game!
+```bash
+./snake_case_0.0.1_macos_arm64
+```
 
 > MacOS can mark this game as a virus or an improper software, so we have to activate it
 > Can you help me write this part of guide? Please contact me on GitHub!
