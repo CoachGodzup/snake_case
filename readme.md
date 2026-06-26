@@ -1,6 +1,15 @@
-# snake_case 
+```
+                            __                                           
+        ______ ____ _____  |  | __ ____       ____ _____    ______ ____  
+       /  ___//    \\__  \ |  |/ // __ \    _/ ___\\__  \  /  ___// __ \ 
+       \___ \|   |  \/ __ \|    <\  ___/    \  \___ / __ \_\___ \\  ___/ 
+ _____/____  >___|  (____  /__|_ \\___  >____\___  >____  /____  >\___  >
+/_____/    \/     \/     \/     \/    \/_____/   \/     \/     \/     \/
 
-A simple snake game made in rust, and spiced up with some AI opponent.
+```
+# _Snake_case
+
+_Snake_case is a simple snake game made in rust, and spiced up with some AI opponent.
 
 ![gameplay screenshot](/assets/screenshot.png)
 
