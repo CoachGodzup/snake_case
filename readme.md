@@ -7,9 +7,16 @@
 /_____/    \/     \/     \/     \/    \/_____/   \/     \/     \/     \/
 
 ```
+![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white)
+![Nokia](https://img.shields.io/badge/Nokia-%23124191.svg?style=for-the-badge&logo=nokia&logoColor=white)
+![Itch.io](https://img.shields.io/badge/Itch-%23FF0B34.svg?style=for-the-badge&logo=Itch.io&logoColor=white)
+![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
+![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
+![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0)
+
 # _Snake_case
 
-_Snake_case is a simple snake game made in rust, and spiced up with some AI opponent.
+A simple snake game made in rust, and spiced up with some AI opponent.
 
 ![gameplay screenshot](/assets/screenshot.png)
 
@@ -27,6 +34,10 @@ git clone git@github.com:CoachGodzup/snake_case.git
 ```
 cargo run
 ```
+
+## Scratch this itch!
+
+I've a WIP Itch.io page too! [Here it is](https://graziearcade.itch.io/)
 
 ## I just want to play it!
 
